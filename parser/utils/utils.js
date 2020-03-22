@@ -1,4 +1,6 @@
 const SYMBOLS_REPLACE_DICT = require('../constants/index').SYMBOLS_REPLACE_DICT;
+const InputParamError = require('../errors/errors').InputParamError;
+const ConfigParamError = require('../errors/errors').InputParamError;
 
 /**
  * We should prepare each word for commonality
@@ -77,16 +79,16 @@ const isArrayOfStrings = valueToCheck => {
  */
 const checkParams = (...params) => {
     if (!isString(params[0])) {
-        throw new Error('First param should be a string for parsing');
+        throw new InputParamError('First param should be a string for parsing');
     }
     if (params.length === 2 && !isObject(params[1]) && !isFunction(params[1])) {
-        throw new Error('Second param should be callback function or config object');
+        throw new InputParamError('Second param should be callback function or config object');
     }
     if (params.length === 3 && !isFunction(params[2])) {
-        throw new Error('Third param should be callback function');
+        throw new InputParamError('Third param should be callback function');
     }
     if (params.length > 3) {
-        throw new Error('Wrong params count. Expect from 1 to 3 params');
+        throw new InputParamError('Wrong params count. Expect from 1 to 3 params');
     }
 };
 
@@ -97,13 +99,13 @@ const checkParams = (...params) => {
  */
 const checkConfigObject = userConfig => {
     if (userConfig.ignoreWords && !isArrayOfStrings(userConfig.ignoreWords)) {
-        throw new Error('Wrong config value: ignoreWords should be array of strings');
+        throw new ConfigParamError('Wrong config value: ignoreWords should be array of strings');
     }
     if (userConfig.minLength && !Number.isFinite(userConfig.minLength)) {
-        throw new Error('Wrong config value: minLength should be finite number');
+        throw new ConfigParamError('Wrong config value: minLength should be finite number');
     }
     if (userConfig.offset && !Number.isFinite(userConfig.offset)) {
-        throw new Error('Wrong config value: offset should be finite number');
+        throw new ConfigParamError('Wrong config value: offset should be finite number');
     }
 }
 
