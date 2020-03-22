@@ -1,0 +1,22 @@
+{
+  "name": "text-parser",
+  "version": "1.0.0",
+  "description": "Text parser for SoftArtel",
+  "main": "parserTest.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zovcharov/text-parser.git"
+  },
+  "author": "Zakhar Ovcharov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zovcharov/text-parser/issues"
+  },
+  "homepage": "https://github.com/zovcharov/text-parser#readme",
+  "devDependencies": {
+    "jest": "^25.1.0"
+  }
+}

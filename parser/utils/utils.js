@@ -1,6 +1,6 @@
 const SYMBOLS_REPLACE_DICT = require('../constants/index').SYMBOLS_REPLACE_DICT;
 const InputParamError = require('../errors/errors').InputParamError;
-const ConfigParamError = require('../errors/errors').InputParamError;
+const ConfigParamError = require('../errors/errors').ConfigParamError;
 
 /**
  * We should prepare each word for commonality
