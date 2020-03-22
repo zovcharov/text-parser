@@ -22,11 +22,13 @@ const keywordsParser = (text, config) => {
         return true;
     }
 
+    config.needLoging && config.logger.info('Start parsing');
+
     text.substr(config.offset, text.length) // Select a substring with offset
         .replace(htmlTagRegExp, '') // Remove all html tags from text
         .split(' ') // Split text by words
         .reduce((acc, curValue) => acc.concat(curValue.split('`')), []) // Convert short collocation ('I`ll'  -> ['I', 'll'])
-        .forEach(word => {
+        .forEach((word, index, curArray) => {
             const preparedWord = prepareWord(word);
 
             if (prepareWord[0] === '<') {
@@ -36,7 +38,12 @@ const keywordsParser = (text, config) => {
             if (shouldUseWord(preparedWord)) {
                 keywords[preparedWord] = keywords[preparedWord] ? keywords[preparedWord] + 1 : 1;
             }
+
+            config.needLoging && config.logger.info(`===> Complete ${index * 100 / curArray.length}%`);
         });
+
+    
+    config.needLoging && config.logger.info('Parsing complete');
 
     return keywords;
 };

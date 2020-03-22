@@ -1,6 +1,7 @@
 const parserAdapter = require('./parsers/parsersAdapter');
 const utils = require('./utils/utils');
 const baseParserConfig = require('./config/baseParserConfig');
+const logger = require('./logger/logger');
 
 /**
  * Function execute parser and involve callback function
@@ -13,6 +14,7 @@ function cbParser(text = '', config = {}, cb = () => {}) {
         cb(
             null, 
             parserAdapter(text, {
+                logger,
                 ...baseParserConfig,
                 ...utils.prepareConfig(config),
             })
@@ -32,6 +34,7 @@ const promiseParser = (text = '', config = {}) =>
     new Promise((resolve, reject) => {
         try {
             resolve(parserAdapter(text, {
+                logger,
                 ...baseParserConfig,
                 ...utils.prepareConfig(config),
             }))
